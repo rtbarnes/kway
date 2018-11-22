@@ -1,0 +1,19 @@
+{
+  "name": "kway",
+  "version": "1.0.0",
+  "description": "the backend service for song-queue application Kway.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rtbarnes/kway.git"
+  },
+  "author": "Reed Barnes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rtbarnes/kway/issues"
+  },
+  "homepage": "https://github.com/rtbarnes/kway#readme"
+}

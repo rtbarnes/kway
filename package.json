@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/rtbarnes/kway/issues"
   },
-  "homepage": "https://github.com/rtbarnes/kway#readme"
+  "homepage": "https://github.com/rtbarnes/kway#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.1.1"
+  }
 }

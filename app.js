@@ -9,8 +9,10 @@ app.use('/', routes);
 app.use(express.static(__dirname + '/public'));
 
 //Server Settings
-const port = 8080;
-
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
     let usr = socket.client.id;

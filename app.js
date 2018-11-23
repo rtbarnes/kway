@@ -9,8 +9,7 @@ app.use('/', routes);
 app.use(express.static(__dirname + '/public'));
 
 //Server Settings
-const hostname = '127.0.0.1';
-const port = 3000;
+const port = 8080;
 
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
@@ -21,7 +20,7 @@ io.on('connection', function(socket){
 });
 
 http.listen(port, () => {
-  console.log(`Server running at http://${hostname}:${port}/`)
+  console.log(`Server listening on port ${port}!`)
 })
 
 

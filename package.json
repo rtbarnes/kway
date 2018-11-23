@@ -4,7 +4,8 @@
   "description": "the backend service for song-queue application Kway.",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node app"
   },
   "repository": {
     "type": "git",

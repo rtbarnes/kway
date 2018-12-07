@@ -1,8 +1,8 @@
 const express = require('express');
 const routes = require('./routes.js');
 const app = express();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 //Express App setup
 app.use('/', routes);
@@ -13,15 +13,18 @@ let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
 }
+
 io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
+  console.log(`new connection`);
+  
+  socket.on('message', function(msg){
     let usr = socket.client.id;
     console.log(msg);
-    io.emit('chat message', `${usr}: ${msg}`);
+    io.emit('message', `${usr}: ${msg}`);
   });
 });
 
-http.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server listening on port ${port}!`)
 })
 

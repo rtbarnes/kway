@@ -16,7 +16,7 @@ const spotifyAPI = new spotify( {
     redirectUri: redirectUri
 });
 
-//ps://accounts.spotify.com/authorize?client_id=a40da5695734475a8d4485f862c7faa3
+//https://accounts.spotify.com/authorize?client_id=a40da5695734475a8d4485f862c7faa3&response_type=code&redirect_uri=https://google.com/&scope=user-read-private%20user-read-email&state=Tennessee
 const authorizeURL = spotifyAPI.createAuthorizeURL(scopes, state);
 console.log(authorizeURL);
 
@@ -32,7 +32,7 @@ routes.get('/', (req, res) => {
 });
 
 routes.get('/authCallback', (req, res) => {
-    console.log(req.url);
+    res.send(req.url);
 });
 
 routes.get('/getSong', (req, res) => {

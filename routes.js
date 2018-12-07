@@ -6,7 +6,7 @@ const spotify = require('spotify-web-api-node');
 const routes = express();
 
 var scopes = ['user-read-private', 'user-read-email'],
-  redirectUri = 'https://google.com/',
+  redirectUri = 'https://kway-app.herokuapp.com/',
   clientId = "a40da5695734475a8d4485f862c7faa3",
   state = 'Tennessee';
 

@@ -17,8 +17,18 @@ const spotifyAPI = new spotify( {
 });
 
 //https://accounts.spotify.com/authorize?client_id=a40da5695734475a8d4485f862c7faa3&response_type=code&redirect_uri=https://google.com/&scope=user-read-private%20user-read-email&state=Tennessee
-const authorizeURL = spotifyAPI.createAuthorizeURL(scopes, state);
-console.log(authorizeURL);
+
+spotifyAPI.clientCredentialsGrant()
+    .then(function(data) {
+        console.log('The access token expires in ' + data.body['expires_in']);
+        console.log('The access token is ' + data.body['access_token']);
+
+        // Save the access token so that it's used in future calls
+        spotifyAPI.setAccessToken(data.body['access_token']);
+    })
+    .catch( (err) => {
+        console.log(`error: ${err}`);
+    });
 
 const options = {
     root: __dirname + '/public'
@@ -35,16 +45,23 @@ routes.get('/authCallback', (req, res) => {
     res.send(req.url);
 });
 
-routes.get('/getSong', (req, res) => {
-    let query = req.body;
+routes.get('/getSong/:name', (req, res) => {
+    let query = req.params.name;
+    console.log(`/getSong/${req.params.name} requested!`);
     spotifyAPI.searchTracks(query)
         .then( (data) => {
             res.status(200);
-            let song = {};
-            song.artist = data["artists"][0]["name"];
-            song.name = data["name"];
-            song.filePath = data["images"][0]["url"];
-            res.json(song);
+
+            let songs = [];
+            data.body.tracks.items.forEach((track) => {
+                let song = {};
+                song.artist = track.artists[0].name;
+                song.name = track.name;
+                song.filePath = track.album.images[0].url;
+                songs.push(song);
+            });
+
+            res.json(songs);
         })
         .catch( (err) => {
             if (err) {
